@@ -2,7 +2,8 @@
 
 #### Student Grade Generator
 
-This piece of codes generates grades according to a student's score
+This piece of code generates grades according to a student's score
+
 It awards grades using the system below
 
 | Marks Range | Grade |
