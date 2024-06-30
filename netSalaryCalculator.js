@@ -41,26 +41,48 @@ const calculateNHIF = (grossSalary) => {
 
 /*PAYE function*/
 function calculatePAYE(monthlyPay) {
+  const personalRelief = 2400;
+  const ownerOccupierInterest = 25000;
+  const annualPersonalRelief = personalRelief * 12;
+  const annualInsuranceRelief = Math.min(60000, insuranceRelief * 12);
+  const annualPensionContribution = 240000;
+  const annualHousingRelief = Math.min(108000, housingRelief * 12);
+  const annualOwnerOccupierInterest = Math.min(
+    300000,
+    ownerOccupierInterest * 12,
+  );
+  const annualDisabilityExemption = isDisabled ? 1800000 : 0;
+
   let annualPay = monthlyPay * 12;
   let tax = 0;
 
   if (annualPay <= 288000) {
-    tax = monthlyPay * 0.1;
+    tax = annualPay * 0.1;
   } else if (annualPay <= 388000) {
-    let monthlyTaxForFirstBracket = 24000 * 0.1;
-    let remainingMonthlyPay = monthlyPay - 24000;
-    tax = monthlyTaxForFirstBracket + remainingMonthlyPay * 0.25;
+    let taxForFirstBracket = 288000 * 0.1;
+    let remainingAnnualPay = annualPay - 288000;
+    tax = taxForFirstBracket + remainingAnnualPay * 0.25;
   } else {
-    let monthlyTaxForFirstBracket = 24000 * 0.1;
-    let monthlyTaxForSecondBracket = 8333 * 0.25;
-    let remainingMonthlyPay = monthlyPay - 32333;
-    tax =
-      monthlyTaxForFirstBracket +
-      monthlyTaxForSecondBracket +
-      remainingMonthlyPay * 0.3;
+    let taxForFirstBracket = 288000 * 0.1;
+    let taxForSecondBracket = 100000 * 0.25;
+    let remainingAnnualPay = annualPay - 388000;
+    tax = taxForFirstBracket + taxForSecondBracket + remainingAnnualPay * 0.3;
   }
 
-  return tax;
+  // Apply annual reliefs
+  let annualTax =
+    tax -
+    annualPersonalRelief -
+    annualInsuranceRelief -
+    annualPensionContribution -
+    annualHousingRelief -
+    annualOwnerOccupierInterest -
+    annualDisabilityExemption;
+
+  // Ensure tax is not negative
+  annualTax = Math.max(annualTax, 0);
+
+  return annualTax / 12; // Return the monthly tax
 }
 
 /*Calculates NSSF*/
