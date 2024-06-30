@@ -1,3 +1,14 @@
-## Student Grade Generator
+## Week One Code Challenge
 
-1. Calculates marks based on grade
+#### Student Grade Generator
+
+This piece of codes generates grades according to a student's score
+It awards grades using the system below
+
+| Marks Range | Grade |
+| ----------- | ----- |
+| > 79        | A     |
+| 60 - 79     | B     |
+| 50 - 59     | C     |
+| 40 - 49     | D     |
+| < 40        | E     |
