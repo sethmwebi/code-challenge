@@ -43,10 +43,11 @@ const calculateNHIF = (grossSalary) => {
 function calculatePAYE(monthlyPay) {
   const personalRelief = 2400;
   const ownerOccupierInterest = 25000;
+  const isDisabled = false;
   const annualPersonalRelief = personalRelief * 12;
-  const annualInsuranceRelief = Math.min(60000, insuranceRelief * 12);
+  const annualInsuranceRelief = 60000;
   const annualPensionContribution = 240000;
-  const annualHousingRelief = Math.min(108000, housingRelief * 12);
+  const annualHousingRelief = 108000;
   const annualOwnerOccupierInterest = Math.min(
     300000,
     ownerOccupierInterest * 12,
