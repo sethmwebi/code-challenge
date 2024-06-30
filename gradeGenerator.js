@@ -1,35 +1,47 @@
-const readline = require("readline");
-
-const rl = readline.createInterface({
+/*set up for user interaction*/
+const userInput = require("node:readline").createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
-function getGrade(marks) {
-  if (marks > 100 || marks < 0) {
-    return "Invalid marks";
-  } else if (marks > 79) {
+/**
+ * this function awards grades according to the following criterion
+ * above 79 -> A
+ * between 60 and 79 -> B
+ * between 50 and 59 -> c
+ * between 40 and 49 -> D
+ * below 40 - E
+ */
+const awardGrade = (score) => {
+  if (score > 100 || score < 0) {
+    return "invalid score!";
+  }
+  if (score > 79) {
     return "A";
-  } else if (marks >= 60) {
+  } else if (score >= 60 && score <= 79) {
     return "B";
-  } else if (marks >= 50) {
+  } else if (score >= 50 && score <= 59) {
     return "C";
-  } else if (marks >= 40) {
+  } else if (score >= 40 && score <= 49) {
     return "D";
   } else {
     return "E";
   }
-}
+};
 
-rl.question("Enter the student marks (0 - 100): ", (input) => {
-  const marks = parseInt(input);
+const askForScore = () => {
+  userInput.question("Enter student score: ", (input) => {
+    const score = Number(input);
 
-  if (isNaN(marks)) {
-    console.log("Please enter a valid number.");
-  } else {
-    const grade = getGrade(marks);
-    console.log(`The grade is: ${grade}`);
-  }
+    if (isNaN(score) || score > 100 || score < 0) {
+      console.log("Please enter a valid score.");
+      askForScore();
+    } else {
+      const grade = awardGrade(score);
+      console.log(`The grade is: ${grade}`);
+      userInput.close();
+    }
+  });
+};
 
-  rl.close();
-});
+askForScore();
