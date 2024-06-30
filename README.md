@@ -25,3 +25,4 @@ This program calculates an individual's salary after NHIF, NSSF and PAYE deducti
 
 1. It assumes the employee does not have a loan and therefore does not implement the infringement benefit tax
 2. For NSSF calculations, the program assumes a pensionable pay of atleast ksh. 7,000
+3. It assumes that an individual is not disabled
