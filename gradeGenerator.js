@@ -13,6 +13,7 @@ const userInput = require("node:readline").createInterface({
  * below 40 - E
  */
 const awardGrade = (score) => {
+  /*sanity check for valid marks*/
   if (score > 100 || score < 0) {
     return "invalid score!";
   }
@@ -29,6 +30,7 @@ const awardGrade = (score) => {
   }
 };
 
+/*continuously ask the user to enter valid score*/
 const askForScore = () => {
   userInput.question("Enter student score: ", (input) => {
     const score = Number(input);
